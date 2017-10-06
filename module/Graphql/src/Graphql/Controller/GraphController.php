@@ -80,8 +80,6 @@ class GraphController extends AbstractActionController
             }
             $query = $data["function"].$args."{ ? }";
 
-            // $query = json_encode($query);
-            // $query = $this->str_replace_first('?', $fetch, $query);
             $query = [
               "query" => $query,
               "args" => $fetch,
@@ -152,13 +150,11 @@ class GraphController extends AbstractActionController
 
         // $in = $this->convertDataToMutation($mutation);
         $in = $this->generateQuery($query);
-        // \Zend\Debug\Debug::dump($in);
         // $input = json_decode(file_get_contents('php://input'), true);
         $input = json_decode($in, true);
         $query = $input['query'];
 
         $variableValues = isset($input['variables']) ? $input['variables'] : null;
-        $operationName = $this->params()->fromPost('operation');
         $rootValue = null;
         $context = null;
 
@@ -170,7 +166,6 @@ class GraphController extends AbstractActionController
                 $rootValue,
                 $context,
                 $variableValues
-                // $operationName
             );
         } catch (\Exception $exception) {
             $result = [
