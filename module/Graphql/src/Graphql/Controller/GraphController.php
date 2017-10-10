@@ -6,6 +6,11 @@ use GraphQL\GraphQl;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 
+/**
+ * GraphQL controller
+ * @package Graphql
+ * @author Juan Pablo Cruz <pablo.cruz@digimobil.es>
+ */
 class GraphController extends AbstractActionController
 {
     protected $schema;
@@ -15,6 +20,14 @@ class GraphController extends AbstractActionController
         $this->schema = $schema;
     }
 
+    /**
+     * Helper for replacing the char '?' with a parameter
+     * @method str_replace_first
+     * @param  string          $from    string to be replaced
+     * @param  string          $to      string to use as replacement
+     * @param  string          $subject source to look for $from
+     * @return string                   string with $from changed
+     */
     protected function str_replace_first($from, $to, $subject)
     {
         $from = '/'.preg_quote($from, '/').'/';
@@ -22,6 +35,12 @@ class GraphController extends AbstractActionController
         return preg_replace($from, $to, $subject, 1);
     }
 
+    /**
+     * Converts an array of data to the proper string format for the mutation
+     * @method convertDataToMutation
+     * @param  array              $data associative array for creating a mutation
+     * @return string                   mutation string
+     */
     protected function convertDataToMutation($data)
     {
         $mutation = [];
@@ -48,6 +67,12 @@ class GraphController extends AbstractActionController
         return $mutation;
     }
 
+    /**
+     * Converts an array of data to the proper string format for quering
+     * @method convertDataToQuery
+     * @param  array           $data associative array for creating a query
+     * @return string              query string
+     */
     protected function convertDataToQuery($data)
     {
         $query = [];
@@ -76,7 +101,7 @@ class GraphController extends AbstractActionController
                 $fetch = implode(",", $fetch);
             }
             if (empty($args)) {
-                $args  ="";
+                $args  = "";
             }
             $query = $data["function"].$args."{ ? }";
 
@@ -88,6 +113,12 @@ class GraphController extends AbstractActionController
         return $query;
     }
 
+    /**
+     * Process an array of data to generate the proper query string
+     * @method generateQuery
+     * @param  array      $data associative array for creating a query
+     * @return string           query string
+     */
     protected function generateQuery($data)
     {
         $q = [];
@@ -110,6 +141,11 @@ class GraphController extends AbstractActionController
         return $query;
     }
 
+    /**
+     * url handler listening for graphql queries
+     * @method graphAction
+     * @return json    returns the result of the provided query via input in json format
+     */
     public function graphAction()
     {
         $query = [

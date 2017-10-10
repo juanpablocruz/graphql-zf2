@@ -7,6 +7,11 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Graphql\Type\Exception\TypeFactoryException;
 
+/**
+ * GraphQL type factory
+ * @package Graphql
+ * @author Juan Pablo Cruz <pablo.cruz@digimobil.es>
+ */
 class TypeFactory implements FactoryInterface
 {
     protected $serviceManager;

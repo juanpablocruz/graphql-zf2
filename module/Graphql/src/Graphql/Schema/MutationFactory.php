@@ -5,6 +5,11 @@ use GraphQl\Type\Definition\ObjectType;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\FactoryInterface;
 
+/**
+ * GraphQL mutation factory
+ * @package Graphql
+ * @author Juan Pablo Cruz <pablo.cruz@digimobil.es>
+ */
 class MutationFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceManager)

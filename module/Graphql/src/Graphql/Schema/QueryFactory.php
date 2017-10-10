@@ -5,6 +5,11 @@ use GraphQl\Type\Definition\ObjectType;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\FactoryInterface;
 
+/**
+ * GraphQL query factory
+ * @package Graphql
+ * @author Juan Pablo Cruz <pablo.cruz@digimobil.es>
+ */
 class QueryFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceManager)

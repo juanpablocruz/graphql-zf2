@@ -6,6 +6,11 @@ use GraphQL\Type\Definition\Type;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
+/**
+ * GraphQL Schema factory
+ * @package Graphql
+ * @author Juan Pablo Cruz <pablo.cruz@digimobil.es>
+ */
 class SchemaFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceManager)
